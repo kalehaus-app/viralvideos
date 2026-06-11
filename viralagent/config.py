@@ -192,12 +192,36 @@ def _env_overrides(prefix: str = "VIRALAGENT__") -> Dict[str, Any]:
     return overrides
 
 
+def load_dotenv(path: str | os.PathLike = ".env") -> None:
+    """Load ``KEY=value`` pairs from a ``.env`` file into ``os.environ``.
+
+    Real environment variables always win — values already set are never
+    overwritten. Quotes around values and ``#`` comment lines are handled.
+    Missing file is a no-op. No third-party dependency required.
+    """
+    p = Path(path)
+    if not p.exists():
+        return
+    for raw in p.read_text(encoding="utf-8").splitlines():
+        line = raw.strip()
+        if not line or line.startswith("#") or "=" not in line:
+            continue
+        key, _, value = line.partition("=")
+        key = key.strip()
+        value = value.strip().strip('"').strip("'")
+        if key and key not in os.environ:
+            os.environ[key] = value
+
+
 def load_config(path: str | os.PathLike | None = None) -> Config:
     """Load configuration from defaults, an optional YAML file, and the env.
 
-    Looks for ``config.yaml`` in the CWD when ``path`` is not given. Missing
+    Looks for ``config.yaml`` in the CWD when ``path`` is not given. A ``.env``
+    file in the CWD is auto-loaded first (without overriding real env vars), so
+    secrets like ``ANTHROPIC_API_KEY`` work just by being in that file. Missing
     files are fine — defaults are used.
     """
+    load_dotenv()
     data = copy.deepcopy(DEFAULTS)
 
     candidate = Path(path) if path else Path("config.yaml")

@@ -24,3 +24,22 @@ def test_yaml_merge(tmp_path):
     assert cfg.content["format"] == "long"
     # Unspecified keys keep their defaults.
     assert cfg.content["words_per_minute"] == 165
+
+
+def test_dotenv_autoloaded(tmp_path, monkeypatch):
+    monkeypatch.chdir(tmp_path)
+    monkeypatch.delenv("ANTHROPIC_API_KEY", raising=False)
+    (tmp_path / ".env").write_text(
+        '# comment\nANTHROPIC_API_KEY="sk-test-123"\n', encoding="utf-8"
+    )
+    cfg = load_config("does-not-exist.yaml")
+    assert cfg.secrets.anthropic_api_key == "sk-test-123"
+
+
+def test_real_env_beats_dotenv(tmp_path, monkeypatch):
+    monkeypatch.chdir(tmp_path)
+    monkeypatch.setenv("ANTHROPIC_API_KEY", "real-key")
+    (tmp_path / ".env").write_text("ANTHROPIC_API_KEY=file-key\n", encoding="utf-8")
+    cfg = load_config("does-not-exist.yaml")
+    # A real exported env var must not be overwritten by the .env file.
+    assert cfg.secrets.anthropic_api_key == "real-key"
