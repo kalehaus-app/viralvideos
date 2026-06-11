@@ -99,6 +99,72 @@ function buildCaptionElements(ctx) {
   }));
 }
 
+/**
+ * Estimate when each script beat (hook/oldWay/aiWay/proof/cta) starts in the
+ * voiceover, by mapping each beat's share of the total word count onto the
+ * transcript's total duration. Good enough to place section badges in sync.
+ */
+function beatTimings(ctx) {
+  const s = ctx.script || {};
+  const beats = [
+    ["hook", s.hook],
+    ["oldWay", s.oldWay],
+    ["aiWay", s.aiWay],
+    ["proof", s.proof],
+    ["cta", s.cta]
+  ];
+  const counts = beats.map(([k, t]) => ({
+    k,
+    n: (t || "").trim().split(/\s+/).filter(Boolean).length
+  }));
+  const totalWords = counts.reduce((a, b) => a + b.n, 0) || 1;
+  const total = voiceoverSeconds(ctx);
+  let acc = 0;
+  const out = {};
+  for (const c of counts) {
+    const start = (acc / totalWords) * total;
+    acc += c.n;
+    const end = (acc / totalWords) * total;
+    out[c.k] = { start, end };
+  }
+  return out;
+}
+
+/** Animated "OLD WAY" / "AI WAY" badges that pop in as each section begins. */
+function buildSectionLabels(ctx) {
+  const t = beatTimings(ctx);
+  const make = (text, beat, color) => {
+    const span = t[beat].end - t[beat].start;
+    return {
+      type: "text",
+      name: `Label-${beat}`,
+      text,
+      track: 4,
+      time: +t[beat].start.toFixed(2),
+      duration: +Math.max(1.2, Math.min(2.6, span)).toFixed(2),
+      x: "50%",
+      y: "12%",
+      width: "70%",
+      x_alignment: "50%",
+      y_alignment: "50%",
+      font_family: "Montserrat",
+      font_weight: "900",
+      font_size: "8 vmin",
+      fill_color: "#ffffff",
+      background_color: color,
+      background_x_padding: "40%",
+      background_y_padding: "30%",
+      background_border_radius: "20%",
+      text_transform: "uppercase",
+      animations: [{ type: "scale", time: 0, duration: 0.45, easing: "elastic-out" }]
+    };
+  };
+  const labels = [];
+  if (ctx.script?.oldWay) labels.push(make("Old Way", "oldWay", "#D7263D"));
+  if (ctx.script?.aiWay) labels.push(make("AI Way", "aiWay", "#1B998B"));
+  return labels;
+}
+
 function buildSource(ctx, audioSource) {
   const total = voiceoverSeconds(ctx);
   const clips = realClips(ctx);
@@ -145,6 +211,9 @@ function buildSource(ctx, audioSource) {
 
   // Track 3: captions on top.
   elements.push(...buildCaptionElements(ctx));
+
+  // Track 4: animated "Old Way" / "AI Way" section badges.
+  elements.push(...buildSectionLabels(ctx));
 
   return {
     output_format: "mp4",
