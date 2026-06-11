@@ -41,6 +41,7 @@ class Editor:
         voiceover_path: Optional[str],
         voiceover_seconds: float,
         out_dir: Path,
+        footage_clips: Optional[List[str]] = None,
     ) -> EditResult:
         out_dir.mkdir(parents=True, exist_ok=True)
 
@@ -54,7 +55,18 @@ class Editor:
 
         captions_path = self._write_srt(captions, durations, out_dir)
 
-        # Only use image assets (the visuals stage may emit .txt stubs).
+        # Preferred path: cut real video clips (your folder / Pexels) to the
+        # narration, with captions burned in and the AI voiceover on top.
+        if footage_clips and have_ffmpeg():
+            video_path = self._render_from_clips(
+                footage_clips, captions, durations, voiceover_path,
+                captions_path.name, out_dir,
+            )
+            if video_path:
+                return EditResult(str(video_path), str(captions_path))
+            log.warning("Clip render failed; falling back to generated cards.")
+
+        # Fallback: generated motion-graphic cards (visuals stage).
         image_assets = [a for a in scene_assets if a.lower().endswith((".png", ".jpg"))]
         if not image_assets or not have_ffmpeg():
             reason = "no image assets" if not image_assets else "ffmpeg unavailable"
@@ -102,6 +114,91 @@ class Editor:
         path = out_dir / "captions.srt"
         path.write_text("\n".join(lines), encoding="utf-8")
         return path
+
+    def _dimensions(self) -> tuple[int, int]:
+        if self.config.content.get("format") == "long":
+            return 1920, 1080
+        return 1080, 1920
+
+    def _render_from_clips(
+        self,
+        clips: List[str],
+        captions: List[str],
+        durations: List[float],
+        voiceover_path: Optional[str],
+        captions_name: str,
+        out_dir: Path,
+    ) -> Optional[Path]:
+        """Cut real video clips to the narration timing, one clip per caption beat.
+
+        Each beat is filled by the next clip in the rotation (looped if the clip
+        is shorter than the beat), normalized to the channel's frame size. Beats
+        are concatenated, captions burned in, and the AI voiceover laid on top —
+        the clips' own audio is dropped.
+        """
+        w, h = self._dimensions()
+        seg_dir = out_dir / "footage"
+        seg_dir.mkdir(parents=True, exist_ok=True)
+
+        vf = (
+            f"scale={w}:{h}:force_original_aspect_ratio=increase,"
+            f"crop={w}:{h},setsar=1,fps=30,format=yuv420p"
+        )
+        seg_files: List[str] = []
+        for i, dur in enumerate(durations):
+            clip = clips[i % len(clips)]
+            seg_rel = f"footage/seg_{i:02d}.mp4"
+            cmd = [
+                "ffmpeg", "-y", "-stream_loop", "-1", "-i", str(Path(clip).resolve()),
+                "-t", f"{max(dur, 0.5):.3f}", "-an", "-vf", vf,
+                "-c:v", "libx264", "-preset", "veryfast", "-pix_fmt", "yuv420p",
+                seg_rel,
+            ]
+            try:
+                subprocess.run(
+                    cmd, cwd=str(out_dir), check=True,
+                    stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True,
+                )
+                seg_files.append(seg_rel)
+            except subprocess.CalledProcessError as exc:  # pragma: no cover
+                log.warning("Clip segment %d failed: %s", i, _tail(exc.stderr))
+
+        if not seg_files:
+            return None
+
+        # Concatenate normalized segments (all share codec/params → stream copy).
+        concat = "\n".join(f"file '{s}'" for s in seg_files)
+        (out_dir / "montage.txt").write_text(concat, encoding="utf-8")
+        try:
+            subprocess.run(
+                ["ffmpeg", "-y", "-f", "concat", "-safe", "0", "-i", "montage.txt",
+                 "-c", "copy", "montage.mp4"],
+                cwd=str(out_dir), check=True,
+                stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True,
+            )
+        except subprocess.CalledProcessError as exc:  # pragma: no cover
+            log.error("Montage concat failed: %s", _tail(exc.stderr))
+            return None
+
+        # Burn captions + mux the voiceover.
+        cmd = ["ffmpeg", "-y", "-i", "montage.mp4"]
+        if voiceover_path:
+            cmd += ["-i", str(Path(voiceover_path).name)]
+        cmd += ["-vf", f"subtitles={captions_name},format=yuv420p",
+                "-c:v", "libx264", "-pix_fmt", "yuv420p"]
+        if voiceover_path:
+            cmd += ["-c:a", "aac", "-b:a", "192k", "-shortest"]
+        cmd += ["video.mp4"]
+        try:
+            subprocess.run(
+                cmd, cwd=str(out_dir), check=True,
+                stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True,
+            )
+        except subprocess.CalledProcessError as exc:  # pragma: no cover
+            log.error("Final clip render failed: %s", _tail(exc.stderr))
+            return None
+        log.info("Rendered video.mp4 from %d real clip beats.", len(seg_files))
+        return out_dir / "video.mp4"
 
     def _render(
         self,
@@ -179,3 +276,7 @@ def _is_relative(path: str, base: Path) -> bool:
         return True
     except ValueError:
         return False
+
+
+def _tail(text: Optional[str], n: int = 400) -> str:
+    return (text or "")[-n:]

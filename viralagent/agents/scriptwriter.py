@@ -60,12 +60,22 @@ class ScriptWriter:
         fmt = content["format"]
         word_budget = int(target / 60 * wpm)
 
+        style = content.get("style", "story")
+        style_note = (
+            "Write as ANALYSIS/COMMENTARY: make a sharp argument or insight about the "
+            "moment, back it with specifics, and let the narration carry the video over "
+            "footage. Each visual direction should describe the soccer footage that "
+            "would play under that line."
+            if style == "commentary"
+            else "Write as STORYTELLING: build narrative tension beat by beat."
+        )
         system = (
             f"You are the scriptwriter and narrator persona for '{channel['name']}', "
             f"a faceless YouTube channel about {channel['niche']}.\n"
             f"Persona: {channel['persona']}\n"
             f"Tone: {channel['tone']}\n"
             f"Audience: {channel['audience']}\n"
+            f"{style_note}\n"
             "Write tight, high-retention narration. Open with a pattern-breaking hook, "
             "escalate stakes every beat, and never waste a word. Be factually careful: "
             "do not invent specific scores, dates, or quotes you are unsure about."

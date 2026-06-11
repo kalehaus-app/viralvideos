@@ -93,9 +93,29 @@ Key settings:
 | Trend discovery | Claude web search | Curated evergreen soccer angles |
 | Scriptwriting | `claude-opus-4-8` | Deterministic template |
 | Voiceover | ElevenLabs / OpenAI / `say`/`espeak` | Silent track sized to script |
-| Visuals | Image-gen MCP / stock | ffmpeg text cards + Ken Burns |
+| Footage | Your clips folder / Pexels stock | (skipped → generated visuals) |
+| Visuals | ffmpeg motion-graphic cards | Visual-direction stubs |
 | Video assembly | ffmpeg | (required for real video) |
 | Publishing | YouTube Data API v3 | Dry-run manifest |
+
+## Real soccer footage in your Shorts (legally)
+
+Set `providers.footage` to put **real video** under the narration instead of
+generated cards. Two backends, both copyright-safe:
+
+- **`folder`** — drop clips into `assets/clips/` (your own recordings, licensed
+  footage, or rights-cleared material). The agent cuts them to the narration,
+  one clip per beat, with captions + voiceover on top. **You're responsible for
+  the rights to whatever you put in the folder.**
+- **`pexels`** — auto-downloads rights-cleared soccer b-roll from the free
+  [Pexels video API](https://www.pexels.com/api/) (set `PEXELS_API_KEY`).
+
+> ⚠️ ViralAgent deliberately does **not** scrape/re-upload copyrighted clips from
+> YouTube/TikTok/broadcasts. Automated reposting of footage you don't own is the
+> #1 way these channels get hit with Content ID claims and terminated.
+
+Set `content.style: commentary` for analysis-forward narration designed to play
+over footage (vs. `story` for narrative tension).
 
 If a preferred backend isn't configured, ViralAgent logs it and uses the fallback so a
 cycle always completes and always leaves an inspectable artifact bundle.

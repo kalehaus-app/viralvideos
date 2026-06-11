@@ -18,6 +18,7 @@ channel:
 
 content:
   format: "short"          # "short" (≤60s vertical 1080x1920) or "long" (16:9 1920x1080)
+  style: "story"           # "story" (narrative) or "commentary" (analysis-forward)
   target_seconds: 50       # target runtime; the script is sized to this
   cadence_hours: 12        # daemon: publish roughly every N hours
   topics_per_cycle: 5      # how many candidate topics to scout & rank per cycle
@@ -31,6 +32,7 @@ llm:
 providers:
   voiceover: "auto"        # auto | elevenlabs | openai | system | silent
   visuals: "auto"          # auto | textcards | stock
+  footage: "auto"          # auto | folder | pexels | none  (real video clips)
   publish: "auto"          # auto | youtube | dryrun
 
 publish:
@@ -48,3 +50,4 @@ publish:
 paths:
   output_dir: "output"
   state_file: "state.json"
+  clips_dir: "assets/clips"   # drop your own / licensed soccer clips here

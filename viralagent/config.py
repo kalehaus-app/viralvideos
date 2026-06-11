@@ -42,6 +42,7 @@ DEFAULTS: Dict[str, Any] = {
     },
     "content": {
         "format": "short",
+        "style": "story",        # "story" or "commentary" (analysis-forward)
         "target_seconds": 50,
         "cadence_hours": 12,
         "topics_per_cycle": 5,
@@ -55,6 +56,7 @@ DEFAULTS: Dict[str, Any] = {
     "providers": {
         "voiceover": "auto",
         "visuals": "auto",
+        "footage": "auto",       # auto | folder | pexels | none
         "publish": "auto",
     },
     "publish": {
@@ -70,6 +72,7 @@ DEFAULTS: Dict[str, Any] = {
     "paths": {
         "output_dir": "output",
         "state_file": "state.json",
+        "clips_dir": "assets/clips",   # drop your own/licensed clips here
     },
 }
 
@@ -83,6 +86,7 @@ class Secrets:
     elevenlabs_voice_id: str = ""
     openai_api_key: str = ""
     stock_api_key: str = ""
+    pexels_api_key: str = ""
     youtube_client_secrets: str = "client_secret.json"
     youtube_token_file: str = "youtube_token.json"
 
@@ -94,6 +98,7 @@ class Secrets:
             elevenlabs_voice_id=os.environ.get("ELEVENLABS_VOICE_ID", ""),
             openai_api_key=os.environ.get("OPENAI_API_KEY", ""),
             stock_api_key=os.environ.get("STOCK_API_KEY", ""),
+            pexels_api_key=os.environ.get("PEXELS_API_KEY", ""),
             youtube_client_secrets=os.environ.get(
                 "YOUTUBE_CLIENT_SECRETS", "client_secret.json"
             ),
@@ -138,6 +143,10 @@ class Config:
     @property
     def state_file(self) -> Path:
         return Path(self.data["paths"]["state_file"])
+
+    @property
+    def clips_dir(self) -> Path:
+        return Path(self.data["paths"].get("clips_dir", "assets/clips"))
 
     def get(self, path: str, default: Any = None) -> Any:
         """Dotted-path lookup, e.g. ``cfg.get("content.format")``."""

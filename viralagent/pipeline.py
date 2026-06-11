@@ -11,6 +11,7 @@ from pathlib import Path
 from typing import Optional
 
 from .agents.editor import Editor
+from .agents.footage import Footage
 from .agents.packager import Packager
 from .agents.publisher import Publisher
 from .agents.scriptwriter import ScriptWriter
@@ -39,6 +40,7 @@ class Pipeline:
         self.writer = ScriptWriter(config, self.llm)
         self.voice = Voiceover(config, dry_run=dry_run)
         self.visuals_agent = Visuals(config, dry_run=dry_run)
+        self.footage = Footage(config, dry_run=dry_run)
         self.editor = Editor(config, dry_run=dry_run)
         self.packager = Packager(config, self.llm, dry_run=dry_run)
         self.publisher = Publisher(config, dry_run=dry_run)
@@ -71,12 +73,20 @@ class Pipeline:
         bundle.voiceover_path = voice.path
         bundle.log(f"voiceover: {voice.backend}")
 
-        # 3. Visuals
-        bundle.scene_assets = self.visuals_agent.generate(script, out_dir)
+        # 3a. Real footage (your clips folder / Pexels), if configured.
+        footage_clips = self.footage.gather(script, out_dir)
+        if footage_clips:
+            bundle.log(f"footage: {len(footage_clips)} clip(s)")
+
+        # 3b. Generated visuals — fallback when there's no real footage.
+        bundle.scene_assets = (
+            [] if footage_clips else self.visuals_agent.generate(script, out_dir)
+        )
 
         # 4. Edit (captions + render)
         edit = self.editor.assemble(
-            script, bundle.scene_assets, voice.path, voice.duration, out_dir
+            script, bundle.scene_assets, voice.path, voice.duration, out_dir,
+            footage_clips=footage_clips,
         )
         bundle.video_path = edit.video_path
         bundle.captions_path = edit.captions_path
