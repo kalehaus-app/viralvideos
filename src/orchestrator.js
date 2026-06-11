@@ -33,8 +33,9 @@ export async function runPipeline(opts = {}) {
 
   const publishEnabled = opts.publish ?? true;
   const dryRun = opts.dryRun ?? !publishEnabled;
+  const privatePost = opts.privatePost ?? false;
 
-  const ctx = { runId, logger, publishEnabled, dryRun };
+  const ctx = { runId, logger, publishEnabled, dryRun, privatePost };
 
   logger.stage(
     `=== Kaley AI run ${runId} (publish=${publishEnabled}, dryRun=${dryRun}) ===`

@@ -18,9 +18,10 @@ import { runPipeline } from "./orchestrator.js";
 const args = process.argv.slice(2);
 const runOnce = args.includes("--run-once");
 const noPublish = args.includes("--no-publish");
+const privatePost = args.includes("--private");
 
 async function once() {
-  const result = await runPipeline({ publish: !noPublish });
+  const result = await runPipeline({ publish: !noPublish, privatePost });
   if (!result.ok) {
     logger.error(`Pipeline run ${result.runId} did not complete.`);
     process.exitCode = 1;
@@ -52,7 +53,7 @@ async function main() {
       }
       running = true;
       try {
-        await runPipeline({ publish: !noPublish });
+        await runPipeline({ publish: !noPublish, privatePost });
       } catch (err) {
         logger.error(`Scheduled run crashed: ${err.message}`);
       } finally {

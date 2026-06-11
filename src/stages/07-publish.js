@@ -77,12 +77,21 @@ async function uploadMedia(mediaUrl, logger) {
   return res.data?.url || mediaUrl;
 }
 
-function buildPost(platform, accountId, caption, hashtags, mediaUrl, idea) {
+function buildPost(platform, accountId, caption, hashtags, mediaUrl, idea, privatePost) {
   const text = `${caption}\n\n${(hashtags || []).join(" ")}`.trim();
   const target =
     platform === "youtube"
-      ? { targetType: "youtube", title: caption.title || idea.title, privacyStatus: "public", shouldNotifySubscribers: true }
-      : { targetType: "tiktok", privacyLevel: "PUBLIC_TO_EVERYONE", disabledComments: false };
+      ? {
+          targetType: "youtube",
+          title: caption.title || idea.title,
+          privacyStatus: privatePost ? "unlisted" : "public",
+          shouldNotifySubscribers: !privatePost
+        }
+      : {
+          targetType: "tiktok",
+          privacyLevel: privatePost ? "SELF_ONLY" : "PUBLIC_TO_EVERYONE",
+          disabledComments: false
+        };
   return {
     post: {
       accountId,
@@ -92,8 +101,8 @@ function buildPost(platform, accountId, caption, hashtags, mediaUrl, idea) {
   };
 }
 
-async function publishTo(platform, accountId, caption, hashtags, mediaUrl, idea, logger) {
-  const body = buildPost(platform, accountId, caption, hashtags, mediaUrl, idea);
+async function publishTo(platform, accountId, caption, hashtags, mediaUrl, idea, privatePost, logger) {
+  const body = buildPost(platform, accountId, caption, hashtags, mediaUrl, idea, privatePost);
   const res = await axios.post("https://backend.blotato.com/v2/posts", body, {
     headers: { "blotato-api-key": env.BLOTATO_API_KEY, "Content-Type": "application/json" },
     timeout: 120000
@@ -122,6 +131,12 @@ export async function run(ctx) {
     logger.warn("Video is a mock placeholder — refusing to publish. Skipped.");
     return ctx;
   }
+
+  logger.info(
+    ctx.privatePost
+      ? "PRIVATE test post — TikTok 'only me', YouTube 'unlisted'."
+      : "PUBLIC post — going live on TikTok + YouTube."
+  );
 
   const mediaSource = assembly.renderUrl || assembly.videoPath;
   const mediaUrl = await withRetry(() => uploadMedia(mediaSource, logger), {
@@ -152,6 +167,7 @@ export async function run(ctx) {
             target.caption.hashtags,
             mediaUrl,
             idea,
+            ctx.privatePost,
             logger
           ),
         { label: `blotato.publish.${t}`, logger }
