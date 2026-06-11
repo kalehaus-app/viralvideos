@@ -41,7 +41,12 @@
   "visuals": {
     "clipsPerVideo": 5,
     "orientation": "portrait",
-    "perPage": 15
+    "perPage": 15,
+    "aiClip": {
+      "enabled": false,
+      "model": "kling3_0",
+      "durationSeconds": 5
+    }
   },
 
   "assembly": {

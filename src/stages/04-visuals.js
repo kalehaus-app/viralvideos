@@ -10,8 +10,35 @@
 import axios from "axios";
 import { env, settings } from "../utils/config.js";
 import { withRetry } from "../utils/retry.js";
+import * as higgsfield from "../utils/higgsfield.js";
 
 export const name = "visuals";
+
+/**
+ * Optionally generate one AI hook clip with Higgsfield and return it as a clip
+ * object to lead the video. Best-effort: any failure (or missing creds) returns
+ * null so the stage falls back to Pexels-only.
+ */
+async function maybeAiClip(ctx) {
+  const cfg = settings.visuals.aiClip || {};
+  if (!cfg.enabled) return null;
+  if (!higgsfield.hasCreds()) {
+    ctx.logger.warn("aiClip is enabled but HIGGSFIELD_API_KEY/SECRET are missing — skipping.");
+    return null;
+  }
+  const prompt = `Vertical 9:16, cinematic, scroll-stopping hook visual for a short video about: ${ctx.idea?.concept || ctx.script?.hook}. Modern, clean, warm lighting, subtle motion. No text.`;
+  try {
+    const url = await higgsfield.generateClip(
+      { prompt, model: cfg.model, durationSeconds: cfg.durationSeconds, aspectRatio: "9:16" },
+      ctx.logger
+    );
+    ctx.logger.ok("AI hook clip generated via Higgsfield.");
+    return { keyword: "AI hook", type: "ai", url, previewImage: null, source: "higgsfield" };
+  } catch (err) {
+    ctx.logger.warn(`Higgsfield AI clip failed (using Pexels only): ${err.message}`);
+    return null;
+  }
+}
 
 function hasKey() {
   return Boolean(env.PEXELS_API_KEY);
@@ -74,14 +101,18 @@ export async function run(ctx) {
     source: "placeholder"
   }));
 
+  // Optional AI hook clip (Higgsfield) leads the video when enabled.
+  const aiClip = await maybeAiClip(ctx);
+
   if (!hasKey()) {
     if (!ctx.dryRun) throw new Error("PEXELS_API_KEY is not set.");
-    ctx.visuals = { clips: [...mockClips(script.keywords), ...screenRecordingPlaceholders] };
+    const lead = aiClip ? [aiClip] : [];
+    ctx.visuals = { clips: [...lead, ...mockClips(script.keywords), ...screenRecordingPlaceholders] };
     logger.ok(`(mock) ${ctx.visuals.clips.length} visual entries prepared.`);
     return ctx;
   }
 
-  const clips = [];
+  const clips = aiClip ? [aiClip] : [];
   const want = settings.visuals.clipsPerVideo;
   for (const keyword of script.keywords) {
     if (clips.length >= want) break;
