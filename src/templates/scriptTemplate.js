@@ -22,8 +22,11 @@ Structure every script as exactly these five beats:
 5. CTA (2-4s): Tell them to follow for more AI workflows and tease the template
    line, without being salesy.
 
-Total spoken length must fit 30-45 seconds when read at a natural pace
-(roughly 80-120 words total).
+HARD LENGTH LIMIT: the TOTAL narration across all five beats must be 90-110
+words — never more. That reads in about 30-40 seconds. Count your words and cut
+ruthlessly: trim adjectives, drop redundant examples, tighten every line. A
+tight 35-second script beats a baggy 50-second one every time. Do not pad to
+hit the structure — brevity is the goal.
 `.trim();
 
 /**

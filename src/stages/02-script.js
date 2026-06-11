@@ -64,6 +64,8 @@ Topic: ${idea.label}
 Concept: ${idea.concept}
 Hook idea: ${idea.hook}
 
+Keep the TOTAL narration (hook + oldWay + aiWay + proof + cta combined) to 90-110 words MAX so it reads in 30-40 seconds. Be ruthless — cut filler, trim every line.
+
 Also list 4-6 concrete stock-footage search keywords for vertical B-roll that matches the narration, and any screen-recording shots that would strengthen the "AI Way" section.
 
 Respond with ONLY this JSON:
