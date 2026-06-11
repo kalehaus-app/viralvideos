@@ -1,24 +1,15 @@
-# Secrets & local config
+# Secrets & credentials
 .env
-config.yaml
-client_secret*.json
-youtube_token.json
-*.credentials.json
+.env.keys.txt
+config/google-sheets-credentials.json
 
-# Generated content bundles
-output/
-state.json
+# Generated output
+/output
 
-# Python
-__pycache__/
-*.py[cod]
-*.egg-info/
-.venv/
-venv/
-.pytest_cache/
-.mypy_cache/
+# Dependencies
+node_modules/
 
-# OS / editor
+# Logs & OS cruft
+npm-debug.log*
 .DS_Store
-.idea/
-.vscode/
+*.log

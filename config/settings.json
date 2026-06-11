@@ -1,0 +1,62 @@
+{
+  "brand": {
+    "name": "Kaley AI",
+    "niche": "AI workflows + spreadsheet systems for solopreneurs and small business owners",
+    "signatureFormat": "Old Way vs AI Way",
+    "tone": "Confident, practical, slightly tongue-in-cheek about 'the old way'",
+    "audience": "Solopreneurs, freelancers, and multi-business owners who are AI-curious but overwhelmed",
+    "cta": "Follow for the AI workflows that run your business while you sleep — templates coming soon.",
+    "productLine": "$7-$47 spreadsheet + AI workflow templates"
+  },
+
+  "approvalMode": false,
+
+  "schedule": {
+    "cron": "0 9 * * *",
+    "timezone": "America/Los_Angeles"
+  },
+
+  "models": {
+    "ideation": "claude-sonnet-4-5",
+    "script": "claude-sonnet-4-5"
+  },
+
+  "ideation": {
+    "conceptsPerRun": 5,
+    "minViralityScore": 6
+  },
+
+  "script": {
+    "targetSeconds": 40,
+    "minSeconds": 30,
+    "maxSeconds": 45
+  },
+
+  "voiceover": {
+    "stability": 0.5,
+    "similarityBoost": 0.75,
+    "style": 0.4
+  },
+
+  "visuals": {
+    "clipsPerVideo": 5,
+    "orientation": "portrait",
+    "perPage": 15
+  },
+
+  "assembly": {
+    "width": 1080,
+    "height": 1920,
+    "backgroundMusic": true
+  },
+
+  "publish": {
+    "platforms": ["tiktok", "youtube"],
+    "hashtagCount": 8
+  },
+
+  "retry": {
+    "attempts": 3,
+    "baseDelayMs": 2000
+  }
+}

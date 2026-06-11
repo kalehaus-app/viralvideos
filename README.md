@@ -1,138 +1,151 @@
-# ⚽ ViralAgent — Autonomous Faceless Soccer/World Cup YouTube Channel
+# Kaley AI — Autonomous AI Content Agent
 
-ViralAgent is an autonomous AI content engine that runs a **faceless YouTube channel**
-dedicated to **viral soccer & World Cup content**. It discovers trending topics,
-writes punchy scripts, generates voiceover and visuals, assembles a finished video,
-writes SEO-optimized metadata + a thumbnail, and (optionally) uploads to YouTube —
-on a schedule, with no human in the loop.
+An autonomous Node.js app that **produces and publishes short-form vertical video**
+(TikTok + YouTube Shorts) every day with no human in the loop after setup.
 
-It is built on the **Claude API** (`claude-opus-4-8`) for the reasoning-heavy stages
-(trend scouting, scriptwriting, packaging) and orchestrates the rest of the media
-pipeline with ffmpeg and pluggable providers.
+**Brand:** Kaley AI · **Niche:** AI workflows + spreadsheet systems for solopreneurs
+**Signature format:** *"Old Way vs AI Way"* — contrasting the manual grind with the
+AI-powered version, aimed at overwhelmed multi-business owners.
+
+---
+
+## How it works
+
+Each daily run executes eight stages in order. Every stage is its own file in
+`src/stages/`, wrapped in 3-retry error handling, and logs to the console **and**
+a per-run file in `output/logs/`.
+
+| # | Stage | File | What it does |
+|---|-------|------|--------------|
+| 1 | **Ideation** | `01-ideation.js` | Claude generates 5 concepts, scores virality, picks the winner. Avoids duplicates via the Google Sheets log. |
+| 2 | **Script** | `02-script.js` | Writes a 30–45s script with the Hook → Old Way → AI Way → Proof → CTA template, plus B-roll keywords. |
+| 3 | **Voiceover** | `03-voiceover.js` | ElevenLabs narrates the script → MP3 in `output/audio`. |
+| 4 | **Visuals** | `04-visuals.js` | Pulls matching vertical B-roll from Pexels; adds placeholders for screen-recording shots. |
+| 5 | **Captions** | `05-captions.js` | OpenAI Whisper transcribes the voiceover → word-level timestamps in `output/captions`. |
+| 6 | **Assembly** | `06-assembly.js` | Creatomate stitches audio + visuals + captions into a 1080×1920 MP4 in `output/videos`. |
+| 7 | **Publish** | `07-publish.js` | Generates per-platform captions + hashtags, posts to TikTok + YouTube Shorts via Blotato. |
+| 8 | **Log** | `08-log.js` | Appends metadata + analytics rows to Google Sheets; always writes a local JSON summary. |
+
+The orchestrator (`src/orchestrator.js`) threads a shared `context` object through
+every stage. `src/index.js` is the entry point: it either runs once or starts the
+cron scheduler.
 
 ```
-┌────────────┐  ┌─────────────┐  ┌───────────┐  ┌──────────┐  ┌──────────┐  ┌───────────┐
-│ TrendScout │─▶│ ScriptWriter│─▶│ Voiceover │─▶│ Visuals  │─▶│  Editor  │─▶│ Publisher │
-│ (web+LLM)  │  │   (LLM)     │  │  (TTS)    │  │ (gen/ffm)│  │ (ffmpeg) │  │ (YouTube) │
-└────────────┘  └─────────────┘  └───────────┘  └──────────┘  └──────────┘  └───────────┘
-        └──────────────────────── Pipeline / Scheduler / State store ───────────────────┘
+src/
+├── index.js            # entry point (cron scheduler / run-once)
+├── orchestrator.js     # runs all 8 stages in sequence
+├── stages/             # one file per pipeline stage
+├── templates/          # topic list + script structure
+└── utils/              # config, logger, retry, approval gate, sheets, ai helpers
+config/
+├── settings.json       # all tunable behavior (see below)
+└── google-sheets-credentials.json   # (you add this — gitignored)
+output/                 # generated audio/captions/videos/logs (gitignored)
 ```
 
-## Why "faceless"?
+---
 
-No on-camera talent. Every asset — narration, footage, captions, thumbnail, title —
-is generated or sourced programmatically, so the channel can publish autonomously
-around the clock.
+## Setup (macOS)
 
-## Quick start
+Requires **Node.js 22** (already the target runtime).
 
 ```bash
-# 1. Install (core deps only — the pipeline runs in dry-run with just these)
-pip install -r requirements.txt
+# 1. Install dependencies
+npm install
 
-# 2. Configure (optional for dry-run)
-cp .env.example .env            # add ANTHROPIC_API_KEY for real script generation
-cp config.example.yaml config.yaml
+# 2. Create your env file and fill in the keys
+cp .env.example .env
+#    then edit .env with your real API keys
 
-# 3. Run one full cycle WITHOUT any API keys (offline templates + local assets)
-python -m viralagent run-once --dry-run
-
-# 4. Run one real cycle (needs ANTHROPIC_API_KEY; uploads only if YouTube is configured)
-python -m viralagent run-once
-
-# 5. Run autonomously forever (publishes on the configured cadence)
-python -m viralagent daemon
+# 3. (For Google Sheets logging) drop your service-account key file at:
+#    config/google-sheets-credentials.json
+#    and share the target spreadsheet with the service account's email.
 ```
 
-Every run writes a self-contained bundle to `output/<slug>/`:
+### Required keys (`.env`)
 
-```
-output/2026-world-cup-dark-horses/
-├── plan.json          # topic + angle + hook + outline
-├── script.json        # scene-by-scene script (hook, beats, CTA)
-├── script.txt         # human-readable script
-├── voiceover.wav      # narration (if TTS available)
-├── scenes/            # generated/sourced visuals per scene
-├── captions.srt       # burned-in subtitle source
-├── video.mp4          # final rendered short/long-form video
-├── thumbnail.png      # click-optimized thumbnail
-└── metadata.json      # title, description, tags, category, publish settings
-```
+See `.env.example` for the full annotated list. At minimum you need:
+`ANTHROPIC_API_KEY`, `ELEVENLABS_API_KEY` + `ELEVENLABS_VOICE_ID`, `PEXELS_API_KEY`,
+`OPENAI_API_KEY`, `CREATOMATE_API_KEY` + `CREATOMATE_TEMPLATE_ID`, `BLOTATO_API_KEY`
++ the TikTok/YouTube account IDs, and the Google Sheets variables.
 
-## Commands
+> **Graceful degradation:** any stage whose key is missing will, in dry-run mode,
+> emit a **mock artifact** so the pipeline still completes end-to-end. This is how
+> `npm run test` works before you've added every key. In a real run
+> (`npm run run-once` / scheduler) a missing required key throws instead.
 
-| Command | Description |
-|---|---|
-| `run-once` | Run a single end-to-end cycle and exit |
-| `daemon` | Run autonomously on the configured schedule |
-| `scout` | Only discover & rank trending topics (prints the queue) |
-| `script "<topic>"` | Generate a script for a specific topic |
-| `package <slug>` | (Re)generate metadata + thumbnail for an existing bundle |
-| `publish <slug>` | Upload an already-rendered bundle to YouTube |
+---
 
-Useful flags: `--dry-run` (no network/uploads), `--format short|long`, `--config <path>`,
-`--count N` (topics to consider), `--no-upload`.
-
-## Configuration
-
-Configuration is layered: **defaults → `config.yaml` → environment variables**.
-See `config.example.yaml` for every knob and `.env.example` for secrets.
-
-Key settings:
-
-- `channel.*` — niche, persona, tone, language, target audience
-- `content.format` — `short` (≤60s vertical) or `long` (horizontal)
-- `content.cadence_hours` — how often the daemon publishes
-- `llm.model` — defaults to `claude-opus-4-8`
-- `providers.*` — TTS / visuals / publish backends (with offline fallbacks)
-
-## Provider backends (all optional, all degrade gracefully)
-
-| Stage | Preferred | Fallback (no keys) |
-|---|---|---|
-| Trend discovery | Claude web search | Curated evergreen soccer angles |
-| Scriptwriting | `claude-opus-4-8` | Deterministic template |
-| Voiceover | ElevenLabs / OpenAI / `say`/`espeak` | Silent track sized to script |
-| Footage | Your clips folder / Pexels stock | (skipped → generated visuals) |
-| Visuals | ffmpeg motion-graphic cards | Visual-direction stubs |
-| Video assembly | ffmpeg | (required for real video) |
-| Publishing | YouTube Data API v3 | Dry-run manifest |
-
-## Real soccer footage in your Shorts (legally)
-
-Set `providers.footage` to put **real video** under the narration instead of
-generated cards. Two backends, both copyright-safe:
-
-- **`folder`** — drop clips into `assets/clips/` (your own recordings, licensed
-  footage, or rights-cleared material). The agent cuts them to the narration,
-  one clip per beat, with captions + voiceover on top. **You're responsible for
-  the rights to whatever you put in the folder.**
-- **`pexels`** — auto-downloads rights-cleared soccer b-roll from the free
-  [Pexels video API](https://www.pexels.com/api/) (set `PEXELS_API_KEY`).
-
-> ⚠️ ViralAgent deliberately does **not** scrape/re-upload copyrighted clips from
-> YouTube/TikTok/broadcasts. Automated reposting of footage you don't own is the
-> #1 way these channels get hit with Content ID claims and terminated.
-
-Set `content.style: commentary` for analysis-forward narration designed to play
-over footage (vs. `story` for narrative tension).
-
-If a preferred backend isn't configured, ViralAgent logs it and uses the fallback so a
-cycle always completes and always leaves an inspectable artifact bundle.
-
-## Responsible automation
-
-- Respects YouTube's policies: the publisher defaults to `private` visibility until you
-  flip `publish.visibility` to `public`, so nothing goes live by accident.
-- Only uses footage you have rights to. The default visual backend generates original
-  motion graphics; wire in a licensed stock provider before enabling stock pulls.
-- Adds attribution/disclosure fields to descriptions when configured.
-
-## Development
+## Running
 
 ```bash
-pip install -r requirements-dev.txt
-pytest -q
+# One full pass WITHOUT publishing (safe to run anytime)
+npm run test
+
+# One full pass WITH publishing (posts to TikTok + YouTube)
+npm run run-once
+
+# Start the daily cron scheduler (full auto)
+npm start
 ```
 
-See `CONTRIBUTING`-style notes inline in each module under `viralagent/agents/`.
+Keep `npm start` alive with a process manager on your Mac, e.g.:
+
+```bash
+npx pm2 start npm --name kaley-ai -- start
+npx pm2 save
+```
+
+---
+
+## Configuration (`config/settings.json`)
+
+Everything tunable lives here — no code edits needed for day-to-day changes.
+
+| Key | Meaning |
+|-----|---------|
+| `approvalMode` | `true` = pause for manual approval after each stage (interactive). `false` = full auto. |
+| `schedule.cron` / `schedule.timezone` | When the scheduler fires (default `0 9 * * *`, i.e. 9am daily). |
+| `models.ideation` / `models.script` | Claude model IDs. Default `claude-sonnet-4-5`; bump to `claude-sonnet-4-6` or `claude-opus-4-8` for higher quality. |
+| `ideation.conceptsPerRun` / `minViralityScore` | How many concepts to generate and the minimum acceptable score. |
+| `script.targetSeconds` / `min` / `max` | Target spoken length. |
+| `voiceover.*` | ElevenLabs voice settings (stability, similarity, style). |
+| `visuals.clipsPerVideo` / `orientation` | B-roll count and orientation. |
+| `assembly.width` / `height` | Output resolution (1080×1920). |
+| `publish.platforms` / `hashtagCount` | Where to post and how many hashtags. |
+| `retry.attempts` / `baseDelayMs` | Retry policy for every external call (exponential backoff). |
+
+### The Creatomate template
+
+The Creatomate template you reference with `CREATOMATE_TEMPLATE_ID` owns the visual
+design. Stage 6 feeds it a `modifications` object keyed by element name
+(`Video-1`…`Video-N`, `Voiceover`, `Captions`). If your template uses different
+element names, edit `buildModifications()` in `src/stages/06-assembly.js`.
+
+### The Google Sheet
+
+Create a sheet with two tabs: **Log** and **Analytics** (names configurable in
+`.env`). The agent creates header rows automatically. The **Log** tab's `topicId`
+and `title` columns are what stage 1 reads to avoid repeating content.
+
+---
+
+## Output
+
+Every run writes timestamped files:
+
+- `output/audio/voiceover_<runId>.mp3`
+- `output/captions/captions_<runId>.json`
+- `output/videos/video_<runId>.mp4`
+- `output/logs/run_<runId>.log` (full console log)
+- `output/logs/summary_<runId>.json` (structured run summary)
+
+All of `output/`, `.env`, and the Google credentials file are **gitignored**.
+
+---
+
+## Extending
+
+- **Add topics:** append to `TOPICS` in `src/templates/topics.js`.
+- **Change the script formula:** edit `SCRIPT_STRUCTURE` in `src/templates/scriptTemplate.js`.
+- **Add a platform:** add it to `publish.platforms` and extend `buildPost()` in `src/stages/07-publish.js`.

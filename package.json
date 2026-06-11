@@ -1,0 +1,31 @@
+{
+  "name": "kaley-ai",
+  "version": "1.0.0",
+  "description": "Autonomous AI content agent that produces and publishes short-form vertical video (TikTok + YouTube Shorts) daily for the Kaley AI brand using the 'Old Way vs AI Way' format.",
+  "type": "module",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "node src/index.js --run-once --no-publish",
+    "run-once": "node src/index.js --run-once"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "keywords": [
+    "ai",
+    "content-automation",
+    "tiktok",
+    "youtube-shorts",
+    "faceless"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.32.1",
+    "axios": "^1.7.9",
+    "dotenv": "^16.4.7",
+    "form-data": "^4.0.1",
+    "googleapis": "^144.0.0",
+    "node-cron": "^3.0.3"
+  }
+}
