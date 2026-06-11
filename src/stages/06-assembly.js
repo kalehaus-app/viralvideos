@@ -18,6 +18,7 @@ import path from "node:path";
 import axios from "axios";
 import { env, settings, PATHS } from "../utils/config.js";
 import { withRetry } from "../utils/retry.js";
+import { uploadToTempHost } from "../utils/upload.js";
 
 export const name = "assembly";
 
@@ -47,15 +48,41 @@ function realClips(ctx) {
   );
 }
 
-/** Big, bold, centered, word-by-word highlight captions (the Shorts look). */
-function buildCaptionElement() {
-  return {
+/** Group Whisper word timestamps into short on-screen caption chunks. */
+function chunkWords(words, { maxWords = 4, maxChars = 24 } = {}) {
+  const chunks = [];
+  let cur = [];
+  let chars = 0;
+  for (const w of words) {
+    const token = (w.word || "").trim();
+    if (!token) continue;
+    const next = chars + token.length + 1;
+    if (cur.length && (cur.length >= maxWords || next > maxChars)) {
+      chunks.push(cur);
+      cur = [];
+      chars = 0;
+    }
+    cur.push(w);
+    chars += token.length + 1;
+  }
+  if (cur.length) chunks.push(cur);
+  return chunks.map((group) => ({
+    text: group.map((w) => (w.word || "").trim()).join(" "),
+    start: group[0].start,
+    end: group[group.length - 1].end
+  }));
+}
+
+/** Big, bold, centered captions built from our own word timestamps. */
+function buildCaptionElements(ctx) {
+  const words = ctx.captions?.words || [];
+  return chunkWords(words).map((chunk, i) => ({
     type: "text",
-    name: "Captions",
-    transcript_source: "Voiceover",
-    transcript_effect: "highlight",
-    transcript_color: "#FFD400",
-    transcript_maximum_length: 24,
+    name: `Caption-${i + 1}`,
+    text: chunk.text,
+    track: 3,
+    time: +chunk.start.toFixed(2),
+    duration: +Math.max(0.4, chunk.end - chunk.start).toFixed(2),
     x: "50%",
     y: "78%",
     width: "86%",
@@ -68,12 +95,11 @@ function buildCaptionElement() {
     stroke_color: "#000000",
     stroke_width: "1.1 vmin",
     text_transform: "uppercase",
-    line_height: "118%",
-    track: 3
-  };
+    line_height: "118%"
+  }));
 }
 
-function buildSource(ctx) {
+function buildSource(ctx, audioSource) {
   const total = voiceoverSeconds(ctx);
   const clips = realClips(ctx);
   const perClip = +(total / clips.length).toFixed(2);
@@ -94,11 +120,11 @@ function buildSource(ctx) {
     });
   });
 
-  // Track 2: the voiceover (named so captions can transcribe it).
+  // Track 2: the voiceover (hosted at a fetchable URL).
   elements.push({
     type: "audio",
     name: "Voiceover",
-    source: audioDataUri(ctx.voiceover.audioPath),
+    source: audioSource,
     track: 2,
     time: 0
   });
@@ -118,7 +144,7 @@ function buildSource(ctx) {
   }
 
   // Track 3: captions on top.
-  elements.push(buildCaptionElement());
+  elements.push(...buildCaptionElements(ctx));
 
   return {
     output_format: "mp4",
@@ -172,8 +198,25 @@ export async function run(ctx) {
     return ctx;
   }
 
-  const source = buildSource(ctx);
-  logger.info(`Assembling ${clips.length} clips over ~${source.duration}s with captions.`);
+  // Creatomate needs the voiceover at a fetchable URL, not an inline blob.
+  let audioSource;
+  try {
+    audioSource = await withRetry(() => uploadToTempHost(ctx.voiceover.audioPath), {
+      label: "upload.voiceover",
+      logger
+    });
+    logger.info("Voiceover uploaded to a temporary public URL.");
+  } catch (err) {
+    logger.warn(`Audio upload failed, falling back to inline data URI: ${err.message}`);
+    audioSource = audioDataUri(ctx.voiceover.audioPath);
+  }
+
+  const source = buildSource(ctx, audioSource);
+  logger.info(
+    `Assembling ${clips.length} clips over ~${source.duration}s with ${
+      source.elements.filter((e) => e.type === "text").length
+    } caption chunks.`
+  );
 
   const render = await withRetry(
     async () => {
