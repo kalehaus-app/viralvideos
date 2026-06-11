@@ -1,0 +1,50 @@
+# ViralAgent configuration. Copy to config.yaml and edit.
+# Precedence: built-in defaults < config.yaml < environment variables.
+
+channel:
+  name: "Touchline Tales"
+  niche: "viral soccer and World Cup moments"
+  # The on-brand narrator persona used for scripts (faceless voice-of-the-channel).
+  persona: >
+    A fast-talking, deeply knowledgeable football storyteller who turns stats,
+    history, and viral moments into edge-of-your-seat micro-documentaries.
+  tone: "energetic, punchy, authoritative, a little cheeky"
+  language: "en"
+  audience: "global football fans aged 16-34 who live on YouTube Shorts and TikTok"
+  # Topics the channel will NOT cover (kept out of the trend queue).
+  banned_topics:
+    - "unverified injury rumors"
+    - "personal/private life gossip"
+
+content:
+  format: "short"          # "short" (≤60s vertical 1080x1920) or "long" (16:9 1920x1080)
+  target_seconds: 50       # target runtime; the script is sized to this
+  cadence_hours: 12        # daemon: publish roughly every N hours
+  topics_per_cycle: 5      # how many candidate topics to scout & rank per cycle
+  words_per_minute: 165    # narration pace used to size scripts
+
+llm:
+  model: "claude-opus-4-8"
+  effort: "high"           # low | medium | high | xhigh | max
+  use_web_search: true     # let the trend scout search the live web for viral moments
+
+providers:
+  voiceover: "auto"        # auto | elevenlabs | openai | system | silent
+  visuals: "auto"          # auto | textcards | stock
+  publish: "auto"          # auto | youtube | dryrun
+
+publish:
+  visibility: "private"    # private | unlisted | public  (default private for safety!)
+  category_id: "17"        # 17 = Sports (YouTube category)
+  made_for_kids: false
+  default_tags:
+    - "soccer"
+    - "football"
+    - "world cup"
+  # Appended to every description (disclosure / attribution / links).
+  description_footer: >
+    ⚽ Subscribe for daily football stories. This video uses AI-assisted production.
+
+paths:
+  output_dir: "output"
+  state_file: "state.json"

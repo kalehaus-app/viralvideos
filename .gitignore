@@ -1,0 +1,24 @@
+# Secrets & local config
+.env
+config.yaml
+client_secret*.json
+youtube_token.json
+*.credentials.json
+
+# Generated content bundles
+output/
+state.json
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+
+# OS / editor
+.DS_Store
+.idea/
+.vscode/
