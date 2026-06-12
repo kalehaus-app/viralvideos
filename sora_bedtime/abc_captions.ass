@@ -1,0 +1,67 @@
+[Script Info]
+ScriptType: v4.00+
+PlayResX: 720
+PlayResY: 1280
+ScaledBorderAndShadow: yes
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: L,DejaVu Sans,150,&H00FFFFFF,&H000000FF,&H00FFFFFF,&H78000000,-1,0,0,0,100,100,0,0,1,8,3,8,40,40,150,1
+Style: W,DejaVu Sans,52,&H0033E6FF,&H000000FF,&H00202020,&H78000000,-1,0,0,0,100,100,0,0,1,5,2,2,40,40,330,1
+Style: Chorus,DejaVu Sans,54,&H00FFFFFF,&H000000FF,&H00C04030,&H78000000,-1,0,0,0,100,100,0,0,1,5,2,2,40,40,330,1
+
+[Events]
+Format: Layer, Start, End, Style, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:00.20,0:00:01.30,L,,,,,{\1c&H1111EE&}A
+Dialogue: 0,0:00:00.20,0:00:01.30,W,,,,,A is for Apple
+Dialogue: 0,0:00:01.30,0:00:02.40,L,,,,,{\1c&H22CCEE&}B
+Dialogue: 0,0:00:01.30,0:00:02.40,W,,,,,B is for Bow
+Dialogue: 0,0:00:02.40,0:00:03.50,L,,,,,{\1c&HEE6611&}C
+Dialogue: 0,0:00:02.40,0:00:03.50,W,,,,,C is for Cat
+Dialogue: 0,0:00:03.50,0:00:04.60,L,,,,,{\1c&H22BB22&}D
+Dialogue: 0,0:00:03.50,0:00:04.60,W,,,,,D is for Dog
+Dialogue: 0,0:00:04.60,0:00:05.70,L,,,,,{\1c&H0088EE&}E
+Dialogue: 0,0:00:04.60,0:00:05.70,W,,,,,E is for Elephant
+Dialogue: 0,0:00:05.70,0:00:06.80,L,,,,,{\1c&HCC2299&}F
+Dialogue: 0,0:00:05.70,0:00:06.80,W,,,,,F is for Fish
+Dialogue: 0,0:00:06.80,0:00:07.90,L,,,,,{\1c&H1111EE&}G
+Dialogue: 0,0:00:06.80,0:00:07.90,W,,,,,G is for Gorilla
+Dialogue: 0,0:00:07.90,0:00:09.00,L,,,,,{\1c&H22CCEE&}H
+Dialogue: 0,0:00:07.90,0:00:09.00,W,,,,,H is for Hat
+Dialogue: 0,0:00:09.00,0:00:10.10,L,,,,,{\1c&HEE6611&}I
+Dialogue: 0,0:00:09.00,0:00:10.10,W,,,,,I is for Igloo
+Dialogue: 0,0:00:10.10,0:00:11.20,L,,,,,{\1c&H22BB22&}J
+Dialogue: 0,0:00:10.10,0:00:11.20,W,,,,,J is for Juice
+Dialogue: 0,0:00:11.20,0:00:12.30,L,,,,,{\1c&H0088EE&}K
+Dialogue: 0,0:00:11.20,0:00:12.30,W,,,,,K is for Kangaroo
+Dialogue: 0,0:00:12.30,0:00:13.40,L,,,,,{\1c&HCC2299&}L
+Dialogue: 0,0:00:12.30,0:00:13.40,W,,,,,L is for Lion
+Dialogue: 0,0:00:13.40,0:00:15.00,L,,,,,{\1c&H1111EE&}M
+Dialogue: 0,0:00:13.40,0:00:15.00,W,,,,,M is for Monkey
+Dialogue: 0,0:00:15.00,0:00:16.10,L,,,,,{\1c&H22CCEE&}N
+Dialogue: 0,0:00:15.00,0:00:16.10,W,,,,,N is for Nose
+Dialogue: 0,0:00:16.10,0:00:17.20,L,,,,,{\1c&HEE6611&}O
+Dialogue: 0,0:00:16.10,0:00:17.20,W,,,,,O is for Octopus
+Dialogue: 0,0:00:17.20,0:00:18.30,L,,,,,{\1c&H22BB22&}P
+Dialogue: 0,0:00:17.20,0:00:18.30,W,,,,,P is for Pig
+Dialogue: 0,0:00:18.30,0:00:19.40,L,,,,,{\1c&H0088EE&}Q
+Dialogue: 0,0:00:18.30,0:00:19.40,W,,,,,Q is for Question
+Dialogue: 0,0:00:19.40,0:00:20.50,L,,,,,{\1c&HCC2299&}R
+Dialogue: 0,0:00:19.40,0:00:20.50,W,,,,,R is for Ring
+Dialogue: 0,0:00:20.50,0:00:21.60,L,,,,,{\1c&H1111EE&}S
+Dialogue: 0,0:00:20.50,0:00:21.60,W,,,,,S is for Sun
+Dialogue: 0,0:00:21.60,0:00:22.70,L,,,,,{\1c&H22CCEE&}T
+Dialogue: 0,0:00:21.60,0:00:22.70,W,,,,,T is for Ten
+Dialogue: 0,0:00:22.70,0:00:23.80,L,,,,,{\1c&HEE6611&}U
+Dialogue: 0,0:00:22.70,0:00:23.80,W,,,,,U is for Umbrella
+Dialogue: 0,0:00:23.80,0:00:24.90,L,,,,,{\1c&H22BB22&}V
+Dialogue: 0,0:00:23.80,0:00:24.90,W,,,,,V is for Van
+Dialogue: 0,0:00:24.90,0:00:26.00,L,,,,,{\1c&H0088EE&}W
+Dialogue: 0,0:00:24.90,0:00:26.00,W,,,,,W is for Watch
+Dialogue: 0,0:00:26.00,0:00:27.10,L,,,,,{\1c&HCC2299&}X
+Dialogue: 0,0:00:26.00,0:00:27.10,W,,,,,X is for Box
+Dialogue: 0,0:00:27.10,0:00:28.20,L,,,,,{\1c&H22CCEE&}Y
+Dialogue: 0,0:00:27.10,0:00:28.20,W,,,,,Y is for Yellow
+Dialogue: 0,0:00:28.20,0:00:29.30,L,,,,,{\1c&HCC2299&}Z
+Dialogue: 0,0:00:28.20,0:00:29.30,W,,,,,Z is for Zoo
+Dialogue: 0,0:00:29.30,0:00:30.00,Chorus,,,,,So many things to learn!
