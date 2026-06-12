@@ -1,0 +1,20 @@
+[Script Info]
+ScriptType: v4.00+
+PlayResX: 1920
+PlayResY: 1080
+ScaledBorderAndShadow: yes
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Lull,DejaVu Serif,66,&H00D8F2FF,&H000000FF,&H00302010,&H8C000000,-1,1,0,0,100,100,0,0,1,5,2,2,140,140,110,1
+
+[Events]
+Format: Layer, Start, End, Style, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:00.30,0:00:04.00,Lull,,,,,Goodnight Teddy, time for bed,
+Dialogue: 0,0:00:04.00,0:00:07.60,Lull,,,,,Rest your sleepy little head.
+Dialogue: 0,0:00:07.60,0:00:11.20,Lull,,,,,Stars are twinkling in the sky,
+Dialogue: 0,0:00:11.20,0:00:15.00,Lull,,,,,Close your eyes, it's lullaby.
+Dialogue: 0,0:00:15.20,0:00:18.80,Lull,,,,,Goodnight Teddy, goodnight Pip,
+Dialogue: 0,0:00:18.80,0:00:22.40,Lull,,,,,Off to dreamland we will slip.
+Dialogue: 0,0:00:22.40,0:00:26.20,Lull,,,,,Hush now, hush now, snuggle tight,
+Dialogue: 0,0:00:26.20,0:00:30.00,Lull,,,,,Sleep well Teddy, sweet goodnight.
