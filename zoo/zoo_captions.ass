@@ -1,0 +1,24 @@
+[Script Info]
+ScriptType: v4.00+
+PlayResX: 1920
+PlayResY: 1080
+ScaledBorderAndShadow: yes
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Sing,DejaVu Sans,66,&H0033E6FF,&H000000FF,&H00203A55,&H78000000,-1,0,0,0,100,100,0,0,1,6,3,2,120,120,90,1
+Style: Pop,DejaVu Sans,118,&H004CFFFF,&H000000FF,&H001030A0,&H78000000,-1,0,0,0,100,100,0,0,1,8,3,2,120,120,90,1
+
+[Events]
+Format: Layer, Start, End, Style, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:00.30,0:00:03.20,Sing,,,,,Pip went to the zoo today!
+Dialogue: 0,0:00:03.20,0:00:06.00,Sing,,,,,So many animals on display!
+Dialogue: 0,0:00:06.00,0:00:10.00,Pop,,,,,Lion goes ROAR!
+Dialogue: 0,0:00:10.20,0:00:15.00,Sing,,,,,Elephant trumpets, proud and proud!
+Dialogue: 0,0:00:15.00,0:00:20.00,Pop,,,,,Tooot!
+Dialogue: 0,0:00:20.20,0:00:25.00,Sing,,,,,Monkey says ooh-ooh, swinging high!
+Dialogue: 0,0:00:25.00,0:00:30.00,Pop,,,,,Ooh-ooh!
+Dialogue: 0,0:00:30.20,0:00:35.00,Sing,,,,,Giraffe so tall it touches the sky!
+Dialogue: 0,0:00:35.00,0:00:40.00,Pop,,,,,So tall!
+Dialogue: 0,0:00:40.20,0:00:44.80,Sing,,,,,Pip and Teddy love the zoo,
+Dialogue: 0,0:00:44.80,0:00:50.00,Sing,,,,,So many animals to see -- and you!
