@@ -1,0 +1,17 @@
+[Script Info]
+ScriptType: v4.00+
+PlayResX: 1080
+PlayResY: 1920
+ScaledBorderAndShadow: yes
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Big,DejaVu Sans,150,&H0022CCEE,&H000000FF,&H00FFFFFF,&H78000000,-1,0,0,0,100,100,0,0,1,9,3,2,80,80,420,1
+
+[Events]
+Format: Layer, Start, End, Style, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:00.30,0:00:03.50,Big,,,,,Yellow!
+Dialogue: 0,0:00:03.50,0:00:06.50,Big,,,,,Yellow!
+Dialogue: 0,0:00:06.50,0:00:09.50,Big,,,,,Yellow car!
+Dialogue: 0,0:00:09.50,0:00:12.50,Big,,,,,Yellow!
+Dialogue: 0,0:00:12.50,0:00:15.00,Big,,,,,Yellow!
