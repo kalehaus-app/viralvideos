@@ -1,0 +1,21 @@
+[Script Info]
+ScriptType: v4.00+
+PlayResX: 1920
+PlayResY: 1080
+ScaledBorderAndShadow: yes
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Sing,DejaVu Sans,62,&H0033E6FF,&H000000FF,&H00203A55,&H78000000,-1,0,0,0,100,100,0,0,1,6,3,2,120,120,90,1
+Style: Pop,DejaVu Sans,110,&H004CFFFF,&H000000FF,&H001030A0,&H78000000,-1,0,0,0,100,100,0,0,1,8,3,2,120,120,90,1
+
+[Events]
+Format: Layer, Start, End, Style, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:00.30,0:00:05.50,Sing,,,,,If you're happy and you know it...
+Dialogue: 0,0:00:05.50,0:00:10.00,Pop,,,,,Clap your hands!
+Dialogue: 0,0:00:10.30,0:00:15.50,Sing,,,,,If you're happy and you know it...
+Dialogue: 0,0:00:15.50,0:00:20.00,Pop,,,,,Stomp your feet!
+Dialogue: 0,0:00:20.30,0:00:25.50,Sing,,,,,If you're happy and you know it...
+Dialogue: 0,0:00:25.50,0:00:30.00,Pop,,,,,Hooray!
+Dialogue: 0,0:00:30.30,0:00:35.00,Sing,,,,,If you're happy and you know it...
+Dialogue: 0,0:00:35.00,0:00:40.00,Pop,,,,,Do all three!
