@@ -1,0 +1,27 @@
+[Script Info]
+ScriptType: v4.00+
+PlayResX: 1920
+PlayResY: 1080
+ScaledBorderAndShadow: yes
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Sing,DejaVu Sans,64,&H0033E6FF,&H000000FF,&H00203A55,&H78000000,-1,0,0,0,100,100,0,0,1,6,3,2,120,120,90,1
+Style: Pop,DejaVu Sans,112,&H004CFFFF,&H000000FF,&H001030A0,&H78000000,-1,0,0,0,100,100,0,0,1,8,3,2,120,120,90,1
+
+[Events]
+Format: Layer, Start, End, Style, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:00.30,0:00:05.00,Sing,,,,,The wheels on the bus go...
+Dialogue: 0,0:00:05.00,0:00:10.00,Pop,,,,,Round and round!
+Dialogue: 0,0:00:10.30,0:00:15.00,Sing,,,,,The door on the bus goes...
+Dialogue: 0,0:00:15.00,0:00:20.00,Pop,,,,,Open and shut!
+Dialogue: 0,0:00:20.30,0:00:25.00,Sing,,,,,The wipers on the bus go...
+Dialogue: 0,0:00:25.00,0:00:30.00,Pop,,,,,Swish swish swish!
+Dialogue: 0,0:00:30.30,0:00:35.00,Sing,,,,,The horn on the bus goes...
+Dialogue: 0,0:00:35.00,0:00:40.00,Pop,,,,,Beep beep beep!
+Dialogue: 0,0:00:40.30,0:00:45.00,Sing,,,,,The people on the bus go...
+Dialogue: 0,0:00:45.00,0:00:50.00,Pop,,,,,Up and down!
+Dialogue: 0,0:00:50.30,0:00:55.00,Sing,,,,,The babies on the bus go...
+Dialogue: 0,0:00:55.00,0:01:00.00,Pop,,,,,Wah wah wah!
+Dialogue: 0,0:01:00.30,0:01:05.00,Sing,,,,,The mommies on the bus go...
+Dialogue: 0,0:01:05.00,0:01:10.00,Pop,,,,,Shhh shhh shhh!
