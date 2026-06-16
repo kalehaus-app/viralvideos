@@ -1,0 +1,23 @@
+[Script Info]
+ScriptType: v4.00+
+PlayResX: 1080
+PlayResY: 1920
+WrapStyle: 0
+ScaledBorderAndShadow: yes
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Line,DejaVu Sans,78,&H00FFFFFF,&H000000FF,&H00103080,&H64000000,1,0,0,0,100,100,0,0,1,6,3,2,60,60,210,1
+Style: Big,DejaVu Sans,104,&H0030E0FF,&H000000FF,&H00103080,&H64000000,1,0,0,0,100,100,0,0,1,7,4,2,60,60,250,1
+
+[Events]
+Format: Layer, Start, End, Style, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:00.00,0:00:01.80,Line,,,,,Let's play soccer, come with Pip!
+Dialogue: 0,0:00:01.80,0:00:03.60,Line,,,,,Here's the ball — give it a kick!
+Dialogue: 0,0:00:03.60,0:00:05.40,Line,,,,,Use your feet, not your hands — oh no!
+Dialogue: 0,0:00:05.40,0:00:07.20,Line,,,,,Kick the ball and watch it go!
+Dialogue: 0,0:00:07.20,0:00:09.00,Line,,,,,See the net? That's called the goal!
+Dialogue: 0,0:00:09.00,0:00:10.80,Line,,,,,Kick it in — you're on a roll!
+Dialogue: 0,0:00:10.80,0:00:12.20,Line,,,,,When you score, what do we say?
+Dialogue: 0,0:00:12.20,0:00:13.60,Big,,,,,GOAL! Hip hip hooray!
+Dialogue: 0,0:00:13.60,0:00:15.00,Line,,,,,Kick, and cheer — that's what we do!
