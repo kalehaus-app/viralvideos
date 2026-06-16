@@ -1,0 +1,17 @@
+[Script Info]
+ScriptType: v4.00+
+PlayResX: 1080
+PlayResY: 1920
+ScaledBorderAndShadow: yes
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Warm,DejaVu Sans,66,&H0033E6FF,&H000000FF,&H00203A55,&H78000000,-1,0,0,0,100,100,0,0,1,6,2,2,80,80,360,1
+Style: Big,DejaVu Sans,100,&H004CFFFF,&H000000FF,&H001030A0,&H78000000,-1,0,0,0,100,100,0,0,1,8,3,2,80,80,360,1
+
+[Events]
+Format: Layer, Start, End, Style, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:00.40,0:00:04.50,Warm,,,,,Lots of candy... hmm!
+Dialogue: 0,0:00:04.50,0:00:09.00,Warm,,,,,How about a yummy apple instead?
+Dialogue: 0,0:00:09.00,0:00:12.50,Warm,,,,,Pip picks healthy fruit!
+Dialogue: 0,0:00:12.50,0:00:15.00,Big,,,,,Crunch! So good!
