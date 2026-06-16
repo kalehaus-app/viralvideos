@@ -1,0 +1,23 @@
+[Script Info]
+ScriptType: v4.00+
+PlayResX: 1080
+PlayResY: 1920
+ScaledBorderAndShadow: yes
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Num,DejaVu Sans,150,&H00FFFFFF,&H000000FF,&H00FFFFFF,&H78000000,-1,0,0,0,100,100,0,0,1,9,3,8,80,80,150,1
+Style: Line,DejaVu Sans,62,&H0033E6FF,&H000000FF,&H00203A55,&H78000000,-1,0,0,0,100,100,0,0,1,6,2,2,80,80,360,1
+
+[Events]
+Format: Layer, Start, End, Style, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:00.30,0:00:01.50,Num,,,,,{\1c&H1111EE&}1
+Dialogue: 0,0:00:01.50,0:00:02.80,Num,,,,,{\1c&HEE6611&}2
+Dialogue: 0,0:00:02.80,0:00:04.10,Num,,,,,{\1c&H22CCEE&}3
+Dialogue: 0,0:00:04.10,0:00:05.40,Num,,,,,{\1c&H22BB22&}4
+Dialogue: 0,0:00:05.40,0:00:07.00,Num,,,,,{\1c&HCC2299&}5
+Dialogue: 0,0:00:00.30,0:00:03.50,Line,,,,,One little finger, two little fingers,
+Dialogue: 0,0:00:03.50,0:00:07.00,Line,,,,,three, four, five on my hand!
+Dialogue: 0,0:00:07.00,0:00:10.50,Line,,,,,Counting is grand!
+Dialogue: 0,0:00:10.50,0:00:13.20,Line,,,,,Count with Pip, it's so much fun!
+Dialogue: 0,0:00:13.20,0:00:15.00,Num,,,,,High five!
