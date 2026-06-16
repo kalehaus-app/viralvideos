@@ -20,3 +20,9 @@ show_characters action=train, name="Mommy", type=soul_2, images=[the 6 job IDs a
 
 ## Using Pip + Mommy together in one scene
 soul_2 conditions the whole image on a single soul_id, so it can't natively place two trained Souls in one shot. For Pip + Mommy scenes, use show_reference_elements (create an Element from a Mommy image) which supports multiple <<<UUID>>> placeholders alongside Pip.
+
+## TRAINED — Mommy Soul is ready
+- mommy_id: 6c889761-3c6d-45ee-8425-e6cb87dedeff
+- model: soul_2 (text2image_soul_v2)
+- Usage: generate_image/video with model='soul_2' + params.soul_id=6c889761-3c6d-45ee-8425-e6cb87dedeff
+- Two-character tip: anchor the shot on Mommy's soul and describe Pip's signature look (curly brown hair, yellow 'Pip' romper, red-and-blue teddy) for correct adult/child scale.
