@@ -1,0 +1,21 @@
+[Script Info]
+ScriptType: v4.00+
+PlayResX: 1920
+PlayResY: 1080
+WrapStyle: 0
+ScaledBorderAndShadow: yes
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Line,DejaVu Sans,66,&H00FFFFFF,&H000000FF,&H00A05020,&H64000000,1,0,0,0,100,100,0,0,1,5,3,2,80,80,70,1
+Style: Big,DejaVu Sans,82,&H0030E0FF,&H000000FF,&H00603010,&H64000000,1,0,0,0,100,100,0,0,1,6,4,2,80,80,80,1
+
+[Events]
+Format: Layer, Start, End, Style, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:00.00,0:00:02.40,Line,,,,,The wheels on the car go round and round,
+Dialogue: 0,0:00:02.40,0:00:04.40,Line,,,,,Round and round, round and round!
+Dialogue: 0,0:00:04.40,0:00:06.40,Line,,,,,Oh no, look — a wheel fell off!
+Dialogue: 0,0:00:06.40,0:00:08.40,Line,,,,,Boo hoo hoo, the little car!
+Dialogue: 0,0:00:08.40,0:00:10.40,Line,,,,,Don't you cry — Pip's here to help!
+Dialogue: 0,0:00:10.40,0:00:12.40,Big,,,,,Snap it on and click it fast!
+Dialogue: 0,0:00:12.40,0:00:15.00,Line,,,,,Now the wheels go round — all through the town! Yay!
