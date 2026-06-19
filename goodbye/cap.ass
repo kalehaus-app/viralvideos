@@ -1,0 +1,22 @@
+[Script Info]
+ScriptType: v4.00+
+PlayResX: 1080
+PlayResY: 1920
+WrapStyle: 0
+ScaledBorderAndShadow: yes
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Line,DejaVu Sans,78,&H00FFFFFF,&H000000FF,&H00A03070,&H64000000,1,0,0,0,100,100,0,0,1,6,3,2,60,60,210,1
+Style: Big,DejaVu Sans,100,&H0030E0FF,&H000000FF,&H00603010,&H64000000,1,0,0,0,100,100,0,0,1,7,4,2,60,60,250,1
+
+[Events]
+Format: Layer, Start, End, Style, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:00.00,0:00:01.90,Line,,,,,See you later, alligator!
+Dialogue: 0,0:00:01.90,0:00:03.70,Line,,,,,In a while, crocodile!
+Dialogue: 0,0:00:03.70,0:00:05.40,Line,,,,,Give a hug, ladybug!
+Dialogue: 0,0:00:05.40,0:00:07.10,Line,,,,,Blow a kiss, jellyfish!
+Dialogue: 0,0:00:07.10,0:00:08.80,Line,,,,,At the door, dinosaur!
+Dialogue: 0,0:00:08.80,0:00:10.60,Line,,,,,Take good care, polar bear!
+Dialogue: 0,0:00:10.60,0:00:12.40,Line,,,,,Wave goodbye, butterfly!
+Dialogue: 0,0:00:12.40,0:00:15.00,Big,,,,,Bye bye from Pip! See you again!
