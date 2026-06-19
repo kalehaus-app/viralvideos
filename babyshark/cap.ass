@@ -1,0 +1,20 @@
+[Script Info]
+ScriptType: v4.00+
+PlayResX: 1080
+PlayResY: 1920
+WrapStyle: 0
+ScaledBorderAndShadow: yes
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Line,DejaVu Sans,86,&H00FFFFFF,&H000000FF,&H00C06000,&H64000000,1,0,0,0,100,100,0,0,1,6,3,2,60,60,220,1
+Style: Big,DejaVu Sans,108,&H00F0E020,&H000000FF,&H00703000,&H64000000,1,0,0,0,100,100,0,0,1,7,4,2,60,60,250,1
+
+[Events]
+Format: Layer, Start, End, Style, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:00.00,0:00:02.40,Line,,,,,Baby shark, doo doo doo!
+Dialogue: 0,0:00:02.40,0:00:04.80,Line,,,,,Mommy shark, doo doo doo!
+Dialogue: 0,0:00:04.80,0:00:07.20,Line,,,,,Daddy shark, doo doo doo!
+Dialogue: 0,0:00:07.20,0:00:09.60,Big,,,,,Dance with Pip!
+Dialogue: 0,0:00:09.60,0:00:12.00,Line,,,,,Chomp chomp — clap your hands!
+Dialogue: 0,0:00:12.00,0:00:15.00,Line,,,,,Bounce and bop — woohoo!
