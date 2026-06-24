@@ -1,0 +1,22 @@
+[Script Info]
+ScriptType: v4.00+
+PlayResX: 1080
+PlayResY: 1920
+WrapStyle: 0
+ScaledBorderAndShadow: yes
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Line,DejaVu Sans,76,&H00FFFFFF,&H000000FF,&H00308040,&H64000000,1,0,0,0,100,100,0,0,1,6,3,2,60,60,210,1
+Style: Big,DejaVu Sans,98,&H0040C040,&H000000FF,&H00FFFFFF,&H64000000,1,0,0,0,100,100,0,0,1,7,4,2,60,60,250,1
+
+[Events]
+Format: Layer, Start, End, Style, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:00.00,0:00:02.00,Line,,,,,Apple, apple, red and round!
+Dialogue: 0,0:00:02.00,0:00:03.80,Line,,,,,Yummy fruit that I have found!
+Dialogue: 0,0:00:03.80,0:00:05.60,Line,,,,,Banana, banana, yellow and sweet!
+Dialogue: 0,0:00:05.60,0:00:07.40,Line,,,,,A healthy fruity treat to eat!
+Dialogue: 0,0:00:07.40,0:00:09.40,Line,,,,,Grapes so purple, oranges too —
+Dialogue: 0,0:00:09.40,0:00:11.40,Line,,,,,Pip loves fruit, how about you?
+Dialogue: 0,0:00:11.40,0:00:13.20,Big,,,,,Yum yum yum — healthy and fun!
+Dialogue: 0,0:00:13.20,0:00:15.00,Line,,,,,Eating fruit is good for everyone!
