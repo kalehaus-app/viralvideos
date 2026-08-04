@@ -1,0 +1,26 @@
+[Script Info]
+ScriptType: v4.00+
+PlayResX: 720
+PlayResY: 1280
+ScaledBorderAndShadow: yes
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Name,DejaVu Sans,88,&H004CFFFF,&H000000FF,&H001030A0,&H78000000,-1,0,0,0,100,100,0,0,1,7,3,2,50,50,300,1
+Style: Doo,DejaVu Sans,58,&H0033E6FF,&H000000FF,&H00203A55,&H78000000,-1,0,0,0,100,100,0,0,1,5,2,2,50,50,300,1
+
+[Events]
+Format: Layer, Start, End, Style, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:00.20,0:00:02.20,Name,,,,,{\1c&H3333EE&}Baby bear!
+Dialogue: 0,0:00:02.20,0:00:04.20,Doo,,,,,doo doo, doo doo doo doo!
+Dialogue: 0,0:00:04.20,0:00:06.00,Name,,,,,{\1c&H3333EE&}Baby bear!
+Dialogue: 0,0:00:06.00,0:00:07.60,Doo,,,,,(hug your teddy!)
+Dialogue: 0,0:00:07.60,0:00:09.60,Name,,,,,{\1c&HCC2299&}Mommy bear!
+Dialogue: 0,0:00:09.60,0:00:11.60,Doo,,,,,doo doo, doo doo doo doo!
+Dialogue: 0,0:00:11.60,0:00:15.00,Name,,,,,{\1c&HCC2299&}Mommy bear!
+Dialogue: 0,0:00:15.00,0:00:17.20,Name,,,,,{\1c&H2299EE&}Daddy bear!
+Dialogue: 0,0:00:17.20,0:00:19.20,Doo,,,,,doo doo, doo doo doo doo!
+Dialogue: 0,0:00:19.20,0:00:21.20,Name,,,,,{\1c&H2299EE&}Daddy bear!
+Dialogue: 0,0:00:21.20,0:00:24.00,Name,,,,,{\1c&H22CC22&}Let's all dance!
+Dialogue: 0,0:00:24.00,0:00:26.40,Doo,,,,,doo doo, doo doo doo doo!
+Dialogue: 0,0:00:26.40,0:00:30.00,Name,,,,,{\1c&H22CC22&}Let's all dance!

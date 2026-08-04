@@ -1,0 +1,23 @@
+[Script Info]
+ScriptType: v4.00+
+PlayResX: 720
+PlayResY: 1280
+ScaledBorderAndShadow: yes
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Sing,DejaVu Sans,56,&H0033E6FF,&H000000FF,&H00203A55,&H78000000,-1,0,0,0,100,100,0,0,1,5,2,2,50,50,300,1
+Style: Pop,DejaVu Sans,82,&H004CFFFF,&H000000FF,&H001030A0,&H78000000,-1,0,0,0,100,100,0,0,1,7,3,2,50,50,300,1
+
+[Events]
+Format: Layer, Start, End, Style, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:00.20,0:00:04.00,Sing,,,,,If you're happy and you know it,\Nclap your hands!
+Dialogue: 0,0:00:04.00,0:00:06.00,Pop,,,,,Clap, clap!
+Dialogue: 0,0:00:06.00,0:00:09.40,Sing,,,,,Then your face\Nwill surely show it!
+Dialogue: 0,0:00:09.40,0:00:13.00,Sing,,,,,If you're happy and you know it,\Nstomp your feet!
+Dialogue: 0,0:00:13.00,0:00:15.00,Pop,,,,,Stomp, stomp!
+Dialogue: 0,0:00:15.00,0:00:18.80,Sing,,,,,If you're happy and you know it,\Nshout "Hooray!"
+Dialogue: 0,0:00:18.80,0:00:21.00,Pop,,,,,Hooray!
+Dialogue: 0,0:00:21.00,0:00:24.40,Sing,,,,,If you're happy and you know it,\Ndo all three!
+Dialogue: 0,0:00:24.40,0:00:27.60,Pop,,,,,Clap, stomp, Hooray!
+Dialogue: 0,0:00:27.60,0:00:30.00,Pop,,,,,Yaaay!

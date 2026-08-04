@@ -1,0 +1,19 @@
+[Script Info]
+ScriptType: v4.00+
+PlayResX: 1080
+PlayResY: 1920
+ScaledBorderAndShadow: yes
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Ask,DejaVu Sans,82,&H00FFFFFF,&H000000FF,&H00203A55,&H78000000,-1,0,0,0,100,100,0,0,1,7,3,2,80,80,420,1
+Style: Moo,DejaVu Sans,150,&H004CFFFF,&H000000FF,&H001030A0,&H78000000,-1,0,0,0,100,100,0,0,1,9,3,2,80,80,420,1
+Style: Rev,DejaVu Sans,96,&H0033E6FF,&H000000FF,&H00203A55,&H78000000,-1,0,0,0,100,100,0,0,1,8,3,2,80,80,420,1
+
+[Events]
+Format: Layer, Start, End, Style, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:00.30,0:00:03.00,Ask,,,,,Who's that?
+Dialogue: 0,0:00:03.00,0:00:06.00,Ask,,,,,Can you guess?
+Dialogue: 0,0:00:06.00,0:00:09.50,Moo,,,,,MOO!
+Dialogue: 0,0:00:09.50,0:00:12.50,Rev,,,,,It's a COW!
+Dialogue: 0,0:00:12.50,0:00:15.00,Moo,,,,,Moo moo!

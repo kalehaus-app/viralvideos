@@ -1,0 +1,27 @@
+[Script Info]
+ScriptType: v4.00+
+PlayResX: 1920
+PlayResY: 1080
+ScaledBorderAndShadow: yes
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Big,DejaVu Sans,110,&H00FFFFFF,&H000000FF,&H00FFFFFF,&H78000000,-1,0,0,0,100,100,0,0,1,8,3,2,120,120,90,1
+Style: Sing,DejaVu Sans,64,&H0033E6FF,&H000000FF,&H00203A55,&H78000000,-1,0,0,0,100,100,0,0,1,6,3,2,120,120,90,1
+
+[Events]
+Format: Layer, Start, End, Style, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:00.20,0:00:03.50,Sing,,,,,Circle, circle, round like the sun!
+Dialogue: 0,0:00:03.50,0:00:06.50,Sing,,,,,Circle, circle, rolling fun!
+Dialogue: 0,0:00:06.50,0:00:10.00,Big,,,,,{\1c&H1111EE&}CIRCLE
+Dialogue: 0,0:00:10.20,0:00:13.50,Sing,,,,,Square, square, four sides the same!
+Dialogue: 0,0:00:13.50,0:00:16.50,Sing,,,,,Square, square, that's its name!
+Dialogue: 0,0:00:16.50,0:00:20.00,Big,,,,,{\1c&HEE6611&}SQUARE
+Dialogue: 0,0:00:20.20,0:00:23.50,Sing,,,,,Triangle, triangle, one two three!
+Dialogue: 0,0:00:23.50,0:00:26.50,Sing,,,,,Three little sides for you and me!
+Dialogue: 0,0:00:26.50,0:00:30.00,Big,,,,,{\1c&H22BB22&}TRIANGLE
+Dialogue: 0,0:00:30.20,0:00:33.50,Sing,,,,,Star, star, shining bright!
+Dialogue: 0,0:00:33.50,0:00:36.50,Sing,,,,,Star, star, twinkle light!
+Dialogue: 0,0:00:36.50,0:00:40.00,Big,,,,,{\1c&H22CCEE&}STAR
+Dialogue: 0,0:00:40.20,0:00:44.50,Sing,,,,,Circle, square, triangle, star...
+Dialogue: 0,0:00:44.50,0:00:50.00,Big,,,,,Look at all the shapes!

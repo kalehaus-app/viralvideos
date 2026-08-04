@@ -1,0 +1,16 @@
+[Script Info]
+ScriptType: v4.00+
+PlayResX: 1920
+PlayResY: 1080
+ScaledBorderAndShadow: yes
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Sing,DejaVu Sans,62,&H0033E6FF,&H000000FF,&H00203A55,&H78000000,-1,0,0,0,100,100,0,0,1,6,3,2,120,120,90,1
+
+[Events]
+Format: Layer, Start, End, Style, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:00.30,0:00:10.00,Sing,,,,,The itsy bitsy spider climbed up the water spout.
+Dialogue: 0,0:00:10.20,0:00:20.00,Sing,,,,,Down came the rain and washed the spider out.
+Dialogue: 0,0:00:20.20,0:00:30.00,Sing,,,,,Out came the sun and dried up all the rain,
+Dialogue: 0,0:00:30.20,0:00:40.00,Sing,,,,,And the itsy bitsy spider climbed up the spout again!

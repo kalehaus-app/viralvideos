@@ -1,0 +1,19 @@
+[Script Info]
+ScriptType: v4.00+
+PlayResX: 720
+PlayResY: 1280
+ScaledBorderAndShadow: yes
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Move,DejaVu Sans,64,&H0000FFFF,&H000000FF,&H00203A55,&H64000000,-1,0,0,0,100,100,0,0,1,5,2,2,40,40,250,1
+Style: Stop,DejaVu Sans,78,&H004CFFFF,&H000000FF,&H001030A0,&H64000000,-1,0,0,0,100,100,0,0,1,6,2,2,40,40,250,1
+
+[Events]
+Format: Layer, Start, End, Style, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:00.20,0:00:03.00,Move,,,,,Crawling, crawling...
+Dialogue: 0,0:00:03.00,0:00:06.00,Move,,,,,crawling, crawling!
+Dialogue: 0,0:00:06.00,0:00:08.40,Move,,,,,Skip, skip, skip!
+Dialogue: 0,0:00:08.40,0:00:11.00,Move,,,,,Skippity skip, skip!
+Dialogue: 0,0:00:11.00,0:00:13.40,Stop,,,,,Now let's STOP!
+Dialogue: 0,0:00:13.40,0:00:15.00,Stop,,,,,STOP! Yaaay!

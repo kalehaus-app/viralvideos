@@ -1,0 +1,19 @@
+[Script Info]
+ScriptType: v4.00+
+PlayResX: 1080
+PlayResY: 1920
+WrapStyle: 0
+ScaledBorderAndShadow: yes
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Line,DejaVu Sans,84,&H00FFFFFF,&H000000FF,&H00103080,&H64000000,1,0,0,0,100,100,0,0,1,6,3,2,60,60,210,1
+Style: Big,DejaVu Sans,108,&H0030E0FF,&H000000FF,&H00103080,&H64000000,1,0,0,0,100,100,0,0,1,7,4,2,60,60,250,1
+
+[Events]
+Format: Layer, Start, End, Style, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:00.00,0:00:02.40,Line,,,,,Kick the ball, Pip!
+Dialogue: 0,0:00:02.40,0:00:04.80,Line,,,,,Little kicks, one two three!
+Dialogue: 0,0:00:04.80,0:00:07.20,Line,,,,,Dribble, dribble, go go go!
+Dialogue: 0,0:00:07.20,0:00:09.00,Big,,,,,Hooray, Pip!
+Dialogue: 0,0:00:09.00,0:00:10.00,Line,,,,,Yaaay! So much fun!

@@ -1,0 +1,20 @@
+[Script Info]
+ScriptType: v4.00+
+PlayResX: 1080
+PlayResY: 1920
+WrapStyle: 0
+ScaledBorderAndShadow: yes
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Line,DejaVu Sans,84,&H00FFFFFF,&H000000FF,&H00803060,&H64000000,1,0,0,0,100,100,0,0,1,6,3,2,60,60,220,1
+Style: Big,DejaVu Sans,100,&H00F0A030,&H000000FF,&H00FFFFFF,&H64000000,1,0,0,0,100,100,0,0,1,7,4,2,60,60,250,1
+
+[Events]
+Format: Layer, Start, End, Style, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:00.00,0:00:02.60,Line,,,,,Look — a little butterfly!
+Dialogue: 0,0:00:02.60,0:00:05.40,Line,,,,,Be gentle, Pip... soft and slow.
+Dialogue: 0,0:00:05.40,0:00:08.20,Big,,,,,Just wave hello!
+Dialogue: 0,0:00:08.20,0:00:11.00,Line,,,,,We look, but we don't grab.
+Dialogue: 0,0:00:11.00,0:00:13.40,Line,,,,,Bye-bye, butterfly!
+Dialogue: 0,0:00:13.40,0:00:15.00,Line,,,,,Gentle hands, kind heart.
